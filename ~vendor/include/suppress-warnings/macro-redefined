@@ -1,0 +1,15 @@
+#if ! defined(WARNINGS_SUPPRESSION_ACTIVE)
+	#error "File included directly outside of warnings suppression scope."
+#endif
+
+#if ! WARNINGS_SUPPRESSION_ACTIVE
+	#undef WARNINGS_SUPPRESSED_FOR_MACRO_REDEFINED
+#elif ! defined(WARNINGS_SUPPRESSED_FOR_MACRO_REDEFINED)
+	#define WARNINGS_SUPPRESSED_FOR_MACRO_REDEFINED
+
+	#if COMPILER_CLANG || COMPILER_GCC && COMPILER_WARNING_AVAILABLE("-Wmacro-redefined")
+COMPILER_WARNING_DISABLE ("-Wmacro-redefined")
+	#elif COMPILER_MSVC
+COMPILER_WARNING_DISABLE (4'005)
+	#endif
+#endif

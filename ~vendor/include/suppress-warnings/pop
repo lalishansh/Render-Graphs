@@ -1,0 +1,24 @@
+#if !defined(WARNINGS_SUPPRESSION_ACTIVE)
+	#error "Warnings must be pushed before including this file"
+#else
+	#undef WARNINGS_SUPPRESSION_ACTIVE
+#endif
+
+#if MSVC_COMPILER
+	#pragma warning(pop)
+#elif GCC_COMPILER
+	#pragma GCC diagnostic pop
+#elif CLANG_COMPILER
+	#pragma clang diagnostic pop
+#else
+	#if !defined(WARNINGS_SUPPRESSION_DUMMY_PUSH)
+		#error "implementation mismatch"
+	#else
+		#undef WARNINGS_SUPPRESSION_DUMMY_PUSH
+	#endif
+#endif
+
+// Restore warnings suppression state
+#define WARNINGS_SUPPRESSION_ACTIVE 0
+#include "./all"
+#undef WARNINGS_SUPPRESSION_ACTIVE

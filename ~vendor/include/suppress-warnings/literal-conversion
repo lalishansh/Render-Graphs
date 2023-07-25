@@ -1,0 +1,15 @@
+#if ! defined(WARNINGS_SUPPRESSION_ACTIVE)
+	#error "File included directly outside of warnings suppression scope."
+#endif
+
+#if ! WARNINGS_SUPPRESSION_ACTIVE
+	#undef WARNINGS_SUPPRESSED_FOR_LITERAL_CONVERSION
+#elif ! defined(WARNINGS_SUPPRESSED_FOR_LITERAL_CONVERSION)
+	#define WARNINGS_SUPPRESSED_FOR_LITERAL_CONVERSION
+
+	#if COMPILER_CLANG || COMPILER_GCC && COMPILER_WARNING_AVAILABLE("-Wliteral-conversion")
+COMPILER_WARNING_DISABLE ("-Wliteral-conversion")
+	#elif COMPILER_MSVC
+COMPILER_WARNING_DISABLE (4'244)
+	#endif
+#endif

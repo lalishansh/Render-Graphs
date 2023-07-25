@@ -1,0 +1,17 @@
+#include "./helper/compiler_helper.hpp"
+
+#if defined(WARNINGS_SUPPRESSION_ACTIVE)
+	#error "Warnings must be popp'ed before including this file"
+#else
+	#define WARNINGS_SUPPRESSION_ACTIVE 1
+#endif
+
+#if MSVC_COMPILER
+	#pragma warning(push)
+#elif GCC_COMPILER
+	#pragma GCC diagnostic push
+#elif CLANG_COMPILER
+	#pragma clang diagnostic push
+#else
+	#define WARNINGS_SUPPRESSION_DUMMY_PUSH
+#endif

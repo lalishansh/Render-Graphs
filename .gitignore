@@ -1,0 +1,44 @@
+# Ignore everything
+**/*.*
+/!build/*
+/!install/*
+/!installers/*
+
+# MAIN TARGET SOURCE FILES
+!/src/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+!/tests/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+
+# EXEC_example SOURCE FILES
+!/EXEC_example/src/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+!/EXEC_example/tests/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+!/EXEC_example/CMakeLists.txt
+
+# LIB_example SOURCE FILES
+!/LIB_example/include/**/*[.h, .hh, .hpp, hxx, .inl, .ixx]
+!/LIB_example/src/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+!/LIB_example/tests/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+!/LIB_example/CMakeLists.txt
+
+# SAMPLES_example SOURCE FILES
+!/SAMPLES_example/*/**/*[.c, .h, .cc, .hh, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+!/SAMPLES_example/CMakeLists.txt
+
+# Include common project files
+!/~vendor/include/**/*[.h, .hh, .hpp, hxx, .inl, .ixx]
+
+!/~vendor/include/suppress-warnings/[README|Readme|readme]*
+!/~vendor/include/suppress-warnings/scripts/*.ps1
+
+!/.clang-*
+!/CMakeLists.txt
+!/CMakePresets.json
+!/vcpkg.json
+
+# Include common files
+!/~scripts/*[.ps1, .cmake]
+
+!/[Readme|README|readme]*
+!/License*
+!/.git*
+
+!/.github/workflows/*.yml
