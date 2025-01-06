@@ -1,10 +1,25 @@
 {
   "name": "hello-world-project",
-  "version-string": "1.0.3",
+  "version-string": "0.0.1",
   "dependencies": [
     "fmt",
-    "boost-test", 
+    "boost-test",
 
-    "glfw3"
+    "glfw3",
+    "glad",
+    "vulkan",
+    {
+      "name": "imgui",
+      "features": [
+        "docking-experimental",
+        "glfw-binding",
+        "opengl2-binding"
+      ]
+    },
+    "nativefiledialog-extended",
+    "stb",
+    "tinyexr",
+
+    "anari"
   ]
 }

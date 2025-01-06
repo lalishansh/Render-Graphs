@@ -5,9 +5,12 @@ FIND_VCPKG()
 
 # Enable testing for the project
 enable_testing()
+if(POLICY CMP0160)
+    cmake_policy(SET CMP0160 OLD)
+endif()
 
 # Project information
-PROJECT(HelloWorldProject VERSION ${VCPKG_MANIFEST_VERSION_STRING} LANGUAGES CXX)
+PROJECT(ANARI_Experiments VERSION ${VCPKG_MANIFEST_VERSION_STRING} LANGUAGES CXX)
 
 # Generate version.h file
 SET(GENERATED_SOURCE_FILES_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
@@ -25,49 +28,25 @@ FILE(WRITE "${GENERATED_SOURCE_FILES_DIR}/version.h"
 SET(CMAKE_CXX_STANDARD 20)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-FIND_PACKAGE(fmt   CONFIG   REQUIRED)
-FIND_PACKAGE(Boost REQUIRED COMPONENTS unit_test_framework)
-
-# Main target
-SET(THIS_EXEC hello_world)
-IF (NOT TARGET ${THIS_EXEC})
-    ADD_EXECUTABLE(${THIS_EXEC}
-            src/main.cpp
-        )
-    TARGET_LINK_LIBRARIES(${THIS_EXEC}
-        PRIVATE
-            fmt::fmt
-        )
-    TARGET_INCLUDE_DIRECTORIES(${THIS_EXEC}
-        PRIVATE
-            ${GENERATED_SOURCE_FILES_DIR}
-        )
-    TARGET_COMPILE_OPTIONS(${THIS_EXEC} 
-        PRIVATE
-            $<$<CXX_COMPILER_ID:MSVC>:/WX /W4>
-            $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror -Wconversion>
-        )
-    
-    # TEST TARGET
-    ADD_TESTS_FOR_TARGET(${THIS_EXEC}
-        INCLUDE_DIRECTORIES
-        COMPILE_DEFINITIONS
-        COMPILE_OPTIONS
-        LINK_LIBRARIES
-        LINK_DIRECTORIES
-        )
-    
-    # Install the executable to relative path inside the install directory
-    INSTALL_TARGET_AND_ITS_DEPENDENCIES(${THIS_EXEC} "./")
-ENDIF()
-    
-ADD_SUBDIRECTORY(EXEC_example)
-ADD_SUBDIRECTORY(LIB_example)
-ADD_SUBDIRECTORY(SAMPLES_example)
+# Projects
+ADD_SUBDIRECTORY(LIB_RenderGraph)
+MESSAGE(${REAL_LIB_TARGET})
+ADD_SUBDIRECTORY(SAMPLES)
 
 # Packaging information
 SET(CPACK_PACKAGE_VENDOR "Ishansh Lal")
 SET(CPACK_PACKAGE_CONTACT "${CPACK_PACKAGE_VENDOR} <lalishansh@gmail.com>")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "HelloWorld, A CMake project template")
 
-CREATE_PACKAGES_VIA_CPACK()
+#CREATE_PACKAGES_VIA_CPACK()
+
+# Run ~vendor/include/suppress_warnings/warning-db-rebuild.ps1
+# to rebuild the warning database
+# (this is a warning suppression library)
+MESSAGE (STATUS "RUNNING POST CONFIG SCRIPTS")
+EXECUTE_PROCESS(
+    COMMAND pwsh -File "${CMAKE_SOURCE_DIR}/~vendor/include/suppress-warnings/warning-db-rebuild.ps1"
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/~vendor/include/suppress_warnings
+    OUTPUT_VARIABLE OUTPUT ECHO_OUTPUT_VARIABLE
+)
+MESSAGE (STATUS "OUTPUT: ${OUTPUT}")

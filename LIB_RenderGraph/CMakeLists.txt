@@ -35,7 +35,7 @@ FILE(GLOB_RECURSE library_public_header_files
     )
 
 
-ADD_LIBRARY(${library_target} STATIC 
+ADD_LIBRARY(${library_target} STATIC
     ${library_public_header_files}
     ${library_src_files})
 
@@ -57,6 +57,7 @@ TARGET_COMPILE_OPTIONS(${library_target}
         PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/WX /W4>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Wconversion>
+        $<$<CXX_COMPILER_ID:GNU>:-fmodules-ts>
     )
 TARGET_COMPILE_DEFINITIONS(${library_target}
     PRIVATE
@@ -86,4 +87,5 @@ ADD_TESTS_FOR_TARGET(${library_target}
         LINK_DIRECTORIES
     )
 
+SET(REAL_LIB_TARGET ${library_target} PARENT_SCOPE)
 # TODO: add install target for library and headers

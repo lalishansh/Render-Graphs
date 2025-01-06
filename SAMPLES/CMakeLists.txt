@@ -80,10 +80,15 @@ FUNCTION(BUILD_EXAMPLE example_dir)
         PRIVATE
             $<$<CXX_COMPILER_ID:MSVC>:/WX /W4>
             $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Wconversion>
+            $<$<CXX_COMPILER_ID:GNU>:-fmodules-ts>
         )
     TARGET_COMPILE_DEFINITIONS(${example_target}
         PRIVATE
             $<$<CXX_COMPILER_ID:MSVC>:_CRT_SECURE_NO_WARNINGS>
+        )
+    TARGET_LINK_LIBRARIES(${example_target}
+        PRIVATE
+            ${REAL_LIB_TARGET}
         )
     
     # from ~vendor dir
@@ -98,7 +103,7 @@ FUNCTION(BUILD_EXAMPLE example_dir)
     TARGET_LINK_LIBRARIES(${example_target}
         PRIVATE
             fmt::fmt
-        )    
+        )
 
     # tests target
     ADD_TESTS_TARGET_FOR_TARGET_FROM_SRC_FILES(

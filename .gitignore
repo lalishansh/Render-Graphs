@@ -4,24 +4,15 @@
 /!install/*
 /!installers/*
 
-# MAIN TARGET SOURCE FILES
-!/src/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
-!/tests/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+# LIB_RenderGraph SOURCE FILES
+!/LIB_RenderGraph/include/**/*[.h, .hh, .hpp, hxx, .inl, .ixx]
+!/LIB_RenderGraph/src/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+!/LIB_RenderGraph/tests/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+!/LIB_RenderGraph/CMakeLists.txt
 
-# EXEC_example SOURCE FILES
-!/EXEC_example/src/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
-!/EXEC_example/tests/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
-!/EXEC_example/CMakeLists.txt
-
-# LIB_example SOURCE FILES
-!/LIB_example/include/**/*[.h, .hh, .hpp, hxx, .inl, .ixx]
-!/LIB_example/src/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
-!/LIB_example/tests/**/*[.c, .h, .cc, .hh, .inl, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
-!/LIB_example/CMakeLists.txt
-
-# SAMPLES_example SOURCE FILES
-!/SAMPLES_example/*/**/*[.c, .h, .cc, .hh, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
-!/SAMPLES_example/CMakeLists.txt
+# SAMPLES SOURCE FILES
+!/SAMPLES/*/**/*[.c, .h, .cc, .hh, .cpp, .hpp, .cxx, .hxx, .cppm, ixx]
+!/SAMPLES/CMakeLists.txt
 
 # Include common project files
 !/~vendor/include/**/*[.h, .hh, .hpp, hxx, .inl, .ixx]
